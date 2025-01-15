@@ -1,6 +1,6 @@
 // src/user/user.entity.ts
-
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Post } from '../post/post.entity'; 
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class User {
@@ -12,4 +12,7 @@ export class User {
 
   @Column()
   email: string;
+
+  @OneToMany(() => Post, post => post.user)  // Relasi OneToMany ke Post
+  posts: Post[];  // Array untuk menyimpan banyak Post terkait dengan User
 }

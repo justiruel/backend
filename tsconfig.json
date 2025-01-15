@@ -17,5 +17,13 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false
-  }
+  },
+  "include": [
+    "src/**/*.ts"   // Pastikan semua file .ts di folder src ikut dikompilasi
+  ],
+  "exclude": [
+    "node_modules",
+    "src/**/*.spec.ts", // Exclude test files
+    "src/**/*.test.ts"
+  ]
 }

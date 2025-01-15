@@ -3,21 +3,16 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
-import { User } from './user/user.entity';
+import { PostModule } from './post/post.module';
+import { AppDataSource } from './config/typeorm.config'; // Import konfigurasi TypeORM
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'postgres', // Gunakan host docker-compose
-      port: 5432,
-      username: 'postgres',
-      password: 'password',
-      database: 'nestjs',
-      entities: [User],  // Pastikan entitas User dimasukkan di sini
-      synchronize: true, // Jangan gunakan di production
+    TypeOrmModule.forRootAsync({
+      useFactory: async () => AppDataSource.options, // Gunakan opsi dari AppDataSource
     }),
     UserModule,
+    PostModule,
   ],
 })
 export class AppModule {}
